@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://bwd72uvef3upe.ok.kimi.link/sitemap.xml
+
+# Interdire l'accès aux fichiers sensibles
+Disallow: /mentions-legales.html
+
+# Autoriser les moteurs de recherche principaux
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /

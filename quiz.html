@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="fr-FR" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Informatique AroData | Testez vos connaissances IT</title>
+    <meta name="description" content="Testez vos connaissances en informatique avec le quiz AroData. Répondez aux questions et obtenez votre diplôme avec note !">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="quiz informatique, test cybersécurité, jeu éducatif, diplôme">
+    <link rel="canonical" href="https://bwd72uvef3upe.ok.kimi.link/quiz.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Quiz IT | AroData - Testez vos connaissances informatiques">
+    <meta property="og:description" content="Quiz interactif sur l'informatique, la cybersécurité et les télécoms. Obtenez votre diplôme AroData !">
+    <meta property="og:url" content="https://bwd72uvef3upe.ok.kimi.link/quiz.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AroData">
+    <meta property="og:image" content="https://bwd72uvef3upe.ok.kimi.link/logo-arodata.png">
+    <meta property="og:image:width" content="400">
+    <meta property="og:image:height" content="100">
+    <meta property="og:locale" content="fr_FR">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Quiz IT | AroData - Testez vos connaissances informatiques">
+    <meta name="twitter:description" content="Quiz interactif sur l'informatique, la cybersécurité et les télécoms. Obtenez votre diplôme AroData !">
+    <meta name="twitter:image" content="https://bwd72uvef3upe.ok.kimi.link/logo-arodata.png">
+    <meta name="twitter:site" content="@arodata">
+
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="logo-icon.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.min.css">
+    
+    <style>
+        /* ============================================
+           QUIZ STYLES - CORRIGÉ ET RESPONSIVE
+           ============================================ */
+        
+        .quiz-page {
+            min-height: 100vh;
+            padding-top: 100px;
+            padding-bottom: 60px;
+        }
+        
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Écran d'accueil */
+        .quiz-intro {
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .quiz-intro h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .quiz-intro h1 span {
+            background: linear-gradient(135deg, #00d4ff 0%, #00a8cc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .quiz-intro > p {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .quiz-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        
+        .quiz-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            color: #fff;
+        }
+        
+        /* Zone de quiz - CACHÉE PAR DÉFAUT */
+        .quiz-game {
+            display: none;
+            padding: 20px 0;
+        }
+        
+        .quiz-game.active {
+            display: block !important;
+        }
+        
+        /* Barre de progression */
+        .quiz-progress {
+            margin-bottom: 30px;
+            background: rgba(13, 31, 60, 0.8);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+        
+        .quiz-progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .quiz-progress-text {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .quiz-progress-score {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #00d4ff;
+        }
+        
+        .quiz-progress-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .quiz-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #00a8cc);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+        
+        /* Carte question */
+        .question-card {
+            background: linear-gradient(145deg, rgba(13, 31, 60, 0.9) 0%, rgba(7, 15, 26, 0.95) 100%);
+            border: 2px solid rgba(0, 212, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 640px) {
+            .question-card {
+                padding: 20px;
+            }
+        }
+        
+        .question-number {
+            font-size: 0.875rem;
+            color: #00d4ff;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 15px;
+        }
+        
+        .question-text {
+            font-family: var(--font-display);
+            font-size: clamp(1.125rem, 3vw, 1.5rem);
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 25px;
+            color: #fff;
+        }
+        
+        /* RÉPONSES - CORRIGÉ */
+        .answers-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .answer-btn {
+            display: flex !important;
+            align-items: center;
+            gap: 15px;
+            padding: 18px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .answer-btn:hover {
+            background: rgba(0, 212, 255, 0.15);
+            border-color: rgba(0, 212, 255, 0.4);
+            transform: translateX(8px);
+        }
+        
+        .answer-btn.selected {
+            background: rgba(0, 212, 255, 0.25);
+            border-color: #00d4ff;
+        }
+        
+        .answer-btn.correct {
+            background: rgba(0, 217, 163, 0.25) !important;
+            border-color: #00d9a3 !important;
+        }
+        
+        .answer-btn.incorrect {
+            background: rgba(255, 71, 87, 0.25) !important;
+            border-color: #ff4757 !important;
+        }
+        
+        .answer-btn.disabled {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        
+        .answer-letter {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 212, 255, 0.2);
+            border-radius: 10px;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1rem;
+            color: #00d4ff;
+            transition: all 0.25s ease;
+        }
+        
+        .answer-btn:hover .answer-letter {
+            background: #00d4ff;
+            color: #0a1628;
+        }
+        
+        .answer-btn.correct .answer-letter {
+            background: #00d9a3 !important;
+            color: #0a1628 !important;
+        }
+        
+        .answer-btn.incorrect .answer-letter {
+            background: #ff4757 !important;
+            color: #fff !important;
+        }
+        
+        .answer-text {
+            flex: 1;
+            line-height: 1.4;
+        }
+        
+        /* Feedback */
+        .question-feedback {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 12px;
+            display: none;
+        }
+        
+        .question-feedback.show {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        .question-feedback.correct {
+            background: rgba(0, 217, 163, 0.15);
+            border: 2px solid #00d9a3;
+        }
+        
+        .question-feedback.incorrect {
+            background: rgba(255, 71, 87, 0.15);
+            border: 2px solid #ff4757;
+        }
+        
+        .feedback-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.125rem;
+        }
+        
+        .question-feedback.correct .feedback-title {
+            color: #00d9a3;
+        }
+        
+        .question-feedback.incorrect .feedback-title {
+            color: #ff4757;
+        }
+        
+        .feedback-text {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+        }
+        
+        /* Bouton suivant */
+        .quiz-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        
+        .btn-next {
+            display: none;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #00d4ff 0%, #00a8cc 100%);
+            color: #0a1628;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-next.show {
+            display: inline-flex !important;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Écran résultats - CACHÉ PAR DÉFAUT */
+        .quiz-results {
+            display: none;
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .quiz-results.active {
+            display: block !important;
+        }
+        
+        .result-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+        
+        .result-score {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #00d4ff 0%, #00a8cc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+        
+        .result-message {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            color: #fff;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .result-subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 40px;
+        }
+        
+        /* DIPLÔME */
+        .diploma-container {
+            margin: 40px 0;
+            perspective: 1000px;
+        }
+        
+        .diploma {
+            background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            border: 3px solid transparent;
+            border-image: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700) 1;
+            border-radius: 20px;
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 0 40px rgba(255, 215, 0, 0.2),
+                inset 0 0 60px rgba(255, 215, 0, 0.05);
+        }
+        
+        @media (max-width: 640px) {
+            .diploma {
+                padding: 25px 20px;
+            }
+        }
+        
+        .diploma::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 12px;
+            pointer-events: none;
+        }
+        
+        .diploma-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .diploma-logo {
+            width: 70px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        
+        .diploma-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.25rem, 4vw, 1.75rem);
+            font-weight: 700;
+            color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 5px;
+        }
+        
+        .diploma-subtitle {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.1em;
+        }
+        
+        .diploma-body {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            margin-bottom: 25px;
+        }
+        
+        .diploma-text {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 15px;
+        }
+        
+        .diploma-name {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+        
+        .diploma-achievement {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 25px;
+        }
+        
+        .diploma-grade {
+            display: inline-block;
+            padding: 15px 35px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            border-radius: 50px;
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+        
+        .diploma-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        @media (max-width: 480px) {
+            .diploma-footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
+        .diploma-date {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .diploma-signature {
+            text-align: right;
+        }
+        
+        @media (max-width: 480px) {
+            .diploma-signature {
+                text-align: center;
+            }
+        }
+        
+        .diploma-signature-text {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 1.5rem;
+            color: #ffd700;
+        }
+        
+        .diploma-signature-label {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Boutons résultats */
+        .result-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 40px;
+        }
+        
+        .result-actions .btn {
+            padding: 14px 28px;
+        }
+        
+        /* Print styles */
+        @media print {
+            .quiz-page {
+                padding: 20px;
+            }
+            
+            .diploma {
+                box-shadow: none;
+                border: 3px solid #ffd700;
+                page-break-inside: avoid;
+            }
+            
+            .result-actions,
+            .header,
+            .back-to-top {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="scroll-progress" aria-hidden="true">
+        <div class="scroll-progress-bar"></div>
+    </div>
+    
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="logo-arodata.png" alt="AroData" class="logo-img">
+            </a>
+
+            <nav class="nav-desktop">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Accueil</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="fai.html" class="nav-link">FAI</a></li>
+                    <li><a href="telephonie-ip.html" class="nav-link">Téléphonie</a></li>
+                    <li><a href="operateur-mobile.html" class="nav-link">Mobile</a></li>
+                    <li><a href="wifi-hotels.html" class="nav-link">WiFi</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="quiz.html" class="nav-link nav-link-featured active">Quiz</a></li>
+                    <li><a href="https://anydesk.com/fr/downloads/thank-you?dv=win_exe" class="nav-link nav-link-assistance" target="_blank">Assistance</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <a href="index.html#contact" class="btn btn-primary btn-header">Devis gratuit</a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu" onclick="
+                var menu = document.getElementById('mobileMenu');
+                var overlay = document.getElementById('mobileOverlay');
+                var isOpen = menu.classList.contains('active');
+                if (isOpen) {
+                    menu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    this.classList.remove('active');
+                    document.body.style.overflow = '';
+                } else {
+                    menu.classList.add('active');
+                    overlay.classList.add('active');
+                    this.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            ">
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+            </button>
+        </div>
+
+        <div class="mobile-menu-overlay" id="mobileOverlay" onclick="
+            document.getElementById('mobileMenu').classList.remove('active');
+            this.classList.remove('active');
+            document.getElementById('menuToggle').classList.remove('active');
+            document.body.style.overflow = '';
+        "></div>
+        <nav class="nav-mobile" id="mobileMenu">
+            <div class="nav-mobile-header">
+                <a href="index.html" class="nav-mobile-logo">
+                    <img src="logo-arodata.png" alt="AroData">
+                </a>
+                <button class="nav-mobile-close" id="mobileClose" aria-label="Fermer" onclick="
+                    document.getElementById('mobileMenu').classList.remove('active');
+                    document.getElementById('mobileOverlay').classList.remove('active');
+                    document.getElementById('menuToggle').classList.remove('active');
+                    document.body.style.overflow = '';
+                ">&times;</button>
+            </div>
+            <ul class="nav-mobile-list">
+                <li><a href="index.html" class="nav-mobile-link"><span class="nav-mobile-icon">🏠</span> Accueil</a></li>
+                <li><a href="services.html" class="nav-mobile-link"><span class="nav-mobile-icon">⚡</span> Services</a></li>
+                <li><a href="fai.html" class="nav-mobile-link"><span class="nav-mobile-icon">🌐</span> FAI FTTH/FTTO</a></li>
+                <li><a href="telephonie-ip.html" class="nav-mobile-link"><span class="nav-mobile-icon">📞</span> Téléphonie IP</a></li>
+                <li><a href="operateur-mobile.html" class="nav-mobile-link"><span class="nav-mobile-icon">📱</span> Mobile</a></li>
+                <li><a href="wifi-hotels.html" class="nav-mobile-link"><span class="nav-mobile-icon">📡</span> WiFi Hôtel</a></li>
+                <li><a href="blog.html" class="nav-mobile-link"><span class="nav-mobile-icon">📰</span> Blog & FAQ</a></li>
+                <li><a href="quiz.html" class="nav-mobile-link active"><span class="nav-mobile-icon">🎯</span> Quiz IT</a></li>
+                <li><a href="https://anydesk.com/fr/downloads/thank-you?dv=win_exe" class="nav-mobile-link nav-mobile-assistance" target="_blank"><span class="nav-mobile-icon">🛠️</span> Assistance</a></li>
+            </ul>
+            <div class="nav-mobile-footer">
+                <a href="index.html#contact" class="btn btn-primary">Demander un devis</a>
+                <div class="nav-mobile-contact">
+                    <a href="tel:+33422537524">04 22 53 75 24</a>
+                    <a href="mailto:contact@arodata.fr">contact@arodata.fr</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="quiz-page">
+        <div class="quiz-container">
+            <!-- Écran d'accueil -->
+            <div class="quiz-intro" id="quizIntro">
+                <h1>Quiz <span>Informatique</span></h1>
+                <p>Testez vos connaissances en informatique et obtenez votre diplôme AroData avec votre note !</p>
+                
+                <div class="quiz-features">
+                    <div class="quiz-feature">
+                        <span>📊</span>
+                        <span>10 questions</span>
+                    </div>
+                    <div class="quiz-feature">
+                        <span>⏱️</span>
+                        <span>Sans limite de temps</span>
+                    </div>
+                    <div class="quiz-feature">
+                        <span>🏆</span>
+                        <span>Diplôme à la fin</span>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary btn-lg" id="startQuizBtn">
+                    <span>Commencer le quiz</span>
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Zone de jeu -->
+            <div class="quiz-game" id="quizGame">
+                <div class="quiz-progress">
+                    <div class="quiz-progress-header">
+                        <span class="quiz-progress-text">Question <span id="currentQuestionNum">1</span>/10</span>
+                        <span class="quiz-progress-score">Score: <span id="currentScore">0</span>/10</span>
+                    </div>
+                    <div class="quiz-progress-bar">
+                        <div class="quiz-progress-fill" id="progressFill" style="width: 10%"></div>
+                    </div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question-number" id="questionNumber">Question 1</div>
+                    <h2 class="question-text" id="questionText">Chargement...</h2>
+                    
+                    <div class="answers-grid" id="answersGrid">
+                        <!-- Les réponses seront injectées ici -->
+                    </div>
+                    
+                    <div class="question-feedback" id="questionFeedback">
+                        <div class="feedback-title" id="feedbackTitle"></div>
+                        <div class="feedback-text" id="feedbackText"></div>
+                    </div>
+                </div>
+                
+                <div class="quiz-actions">
+                    <button class="btn-next" id="nextQuestionBtn">
+                        <span>Question suivante</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Écran résultats -->
+            <div class="quiz-results" id="quizResults">
+                <div class="result-icon" id="resultIcon">🏆</div>
+                <div class="result-score" id="resultScore">0/10</div>
+                <h2 class="result-message" id="resultMessage">Félicitations !</h2>
+                <p class="result-subtitle" id="resultSubtitle">Vous avez terminé le quiz.</p>
+                
+                <!-- DIPLÔME -->
+                <div class="diploma-container">
+                    <div class="diploma">
+                        <div class="diploma-header">
+                            <img src="logo-arodata.png" alt="AroData" class="diploma-logo">
+                            <div class="diploma-title">Diplôme</div>
+                            <div class="diploma-subtitle">de Compétences Informatiques</div>
+                        </div>
+                        
+                        <div class="diploma-body">
+                            <p class="diploma-text">Ce diplôme certifie que</p>
+                            <div class="diploma-name" id="diplomaName">Candidat</div>
+                            <p class="diploma-achievement">a brillamment réussi le Quiz Informatique AroData</p>
+                            <div class="diploma-grade" id="diplomaGrade">0/10</div>
+                        </div>
+                        
+                        <div class="diploma-footer">
+                            <div class="diploma-date" id="diplomaDate">Date: 01/01/2024</div>
+                            <div class="diploma-signature">
+                                <div class="diploma-signature-text">AroData</div>
+                                <div class="diploma-signature-label">Spécialiste en réseaux d'entreprise</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="result-actions">
+                    <button class="btn btn-primary" id="restartQuizBtn">
+                        <span>Rejouer</span>
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                        </svg>
+                    </button>
+                    <a href="index.html#contact" class="btn btn-outline">
+                        <span>Contactez-nous</span>
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <button class="btn btn-outline" onclick="window.print()">
+                        <span>Imprimer le diplôme</span>
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                            <path d="M6 14h12v8H6z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <p class="footer-copyright">© 2026 AroData - <a href="mentions-legales.html">Mentions légales</a></p>
+                    <p class="footer-credit">Expert en infogérance, téléphonie IP et opérateur mobile</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Retour en haut de page" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+    
+    <script src="script.js"></script>
+    <script>
+    // ============================================
+    // QUIZ INFORMATIQUE ARODATA - CORRIGÉ
+    // ============================================
+    
+    (function() {
+        'use strict';
+        
+        // Données du quiz
+        const quizData = [
+            {
+                question: "Quel est le rôle principal d'un pare-feu (firewall) ?",
+                answers: [
+                    "Accélérer la connexion Internet",
+                    "Bloquer les menaces et contrôler le trafic réseau",
+                    "Réparer les virus informatiques",
+                    "Sauvegarder les données"
+                ],
+                correct: 1,
+                explanation: "Un pare-feu analyse et filtre le trafic réseau entrant et sortant pour protéger votre système contre les menaces."
+            },
+            {
+                question: "Que signifie l'acronyme 'RAM' ?",
+                answers: [
+                    "Random Access Memory (Mémoire vive)",
+                    "Read And Modify",
+                    "Remote Access Module",
+                    "Rapid Application Manager"
+                ],
+                correct: 0,
+                explanation: "La RAM (Random Access Memory) est la mémoire vive de l'ordinateur, utilisée pour stocker temporairement les données en cours d'utilisation."
+            },
+            {
+                question: "Quel protocole est utilisé pour sécuriser les connexions web (HTTPS) ?",
+                answers: [
+                    "FTP",
+                    "SSL/TLS",
+                    "HTTP",
+                    "SMTP"
+                ],
+                correct: 1,
+                explanation: "SSL (Secure Sockets Layer) et son successeur TLS (Transport Layer Security) cryptent les données échangées entre le navigateur et le serveur."
+            },
+            {
+                question: "Qu'est-ce qu'un ransomware ?",
+                answers: [
+                    "Un logiciel antivirus",
+                    "Un type de malware qui chiffre les données et demande une rançon",
+                    "Un outil de sauvegarde",
+                    "Un pare-feu avancé"
+                ],
+                correct: 1,
+                explanation: "Un ransomware est un logiciel malveillant qui chiffre les fichiers de la victime et exige un paiement pour les déchiffrer."
+            },
+            {
+                question: "Quelle est la différence entre un disque HDD et SSD ?",
+                answers: [
+                    "Le SSD est plus rapide car il n'a pas de pièces mécaniques",
+                    "Le HDD est plus rapide",
+                    "Il n'y a pas de différence",
+                    "Le SSD ne peut pas stocker de données"
+                ],
+                correct: 0,
+                explanation: "Le SSD (Solid State Drive) utilise de la mémoire flash et est beaucoup plus rapide qu'un HDD (Hard Disk Drive) qui utilise des plateaux mécaniques."
+            },
+            {
+                question: "Qu'est-ce que le phishing ?",
+                answers: [
+                    "Une technique de pêche informatique",
+                    "Une attaque visant à voler des informations en se faisant passer pour une entité de confiance",
+                    "Un type de virus",
+                    "Un protocole de sécurité"
+                ],
+                correct: 1,
+                explanation: "Le phishing est une technique d'ingénierie sociale où les attaquants usurpent l'identité d'organisations légitimes pour voler des informations sensibles."
+            },
+            {
+                question: "Quel est le port standard pour le protocole HTTP ?",
+                answers: [
+                    "21",
+                    "80",
+                    "443",
+                    "25"
+                ],
+                correct: 1,
+                explanation: "Le port 80 est le port standard pour le protocole HTTP. Le port 443 est utilisé pour HTTPS (HTTP sécurisé)."
+            },
+            {
+                question: "Qu'est-ce qu'une sauvegarde 3-2-1 ?",
+                answers: [
+                    "3 copies sur 2 supports différents dont 1 hors site",
+                    "3 sauvegardes par jour",
+                    "2 copies sur 3 ordinateurs",
+                    "1 sauvegarde tous les 3 jours"
+                ],
+                correct: 0,
+                explanation: "La règle 3-2-1 recommande d'avoir 3 copies des données sur 2 types de supports différents, dont 1 copie stockée hors site."
+            },
+            {
+                question: "Que signifie VPN ?",
+                answers: [
+                    "Virtual Private Network",
+                    "Very Powerful Network",
+                    "Virtual Public Node",
+                    "Verified Private Node"
+                ],
+                correct: 0,
+                explanation: "VPN (Virtual Private Network) crée une connexion sécurisée et cryptée sur un réseau moins sécurisé, comme Internet."
+            },
+            {
+                question: "Quelle est la première chose à faire en cas de infection par ransomware ?",
+                answers: [
+                    "Payer la rançon immédiatement",
+                    "Déconnecter l'appareil du réseau et contacter un professionnel",
+                    "Éteindre l'ordinateur et attendre",
+                    "Réinstaller Windows sans sauvegarde"
+                ],
+                correct: 1,
+                explanation: "La première étape est d'isoler l'appareil infecté pour empêcher la propagation, puis de contacter des professionnels pour évaluer les options de récupération."
+            }
+        ];
+        
+        // Variables du quiz
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answered = false;
+        
+        // Éléments DOM
+        const quizIntro = document.getElementById('quizIntro');
+        const quizGame = document.getElementById('quizGame');
+        const quizResults = document.getElementById('quizResults');
+        const startBtn = document.getElementById('startQuizBtn');
+        const nextBtn = document.getElementById('nextQuestionBtn');
+        const restartBtn = document.getElementById('restartQuizBtn');
+        
+        const currentQuestionNum = document.getElementById('currentQuestionNum');
+        const currentScoreEl = document.getElementById('currentScore');
+        const progressFill = document.getElementById('progressFill');
+        const questionNumber = document.getElementById('questionNumber');
+        const questionText = document.getElementById('questionText');
+        const answersGrid = document.getElementById('answersGrid');
+        const questionFeedback = document.getElementById('questionFeedback');
+        const feedbackTitle = document.getElementById('feedbackTitle');
+        const feedbackText = document.getElementById('feedbackText');
+        
+        // Fonction pour démarrer le quiz
+        function startQuiz() {
+            console.log('Quiz démarré !');
+            currentQuestionIndex = 0;
+            score = 0;
+            answered = false;
+            
+            // Cacher l'intro et les résultats
+            quizIntro.style.display = 'none';
+            quizResults.style.display = 'none';
+            quizResults.classList.remove('active');
+            
+            // Afficher le jeu
+            quizGame.style.display = 'block';
+            quizGame.classList.add('active');
+            
+            updateScore();
+            loadQuestion();
+        }
+        
+        // Fonction pour charger une question
+        function loadQuestion() {
+            answered = false;
+            const question = quizData[currentQuestionIndex];
+            
+            // Mise à jour de la progression
+            currentQuestionNum.textContent = currentQuestionIndex + 1;
+            progressFill.style.width = `${((currentQuestionIndex + 1) / quizData.length) * 100}%`;
+            
+            // Mise à jour de la question
+            questionNumber.textContent = `Question ${currentQuestionIndex + 1}`;
+            questionText.textContent = question.question;
+            
+            // Génération des réponses
+            answersGrid.innerHTML = '';
+            questionFeedback.classList.remove('show');
+            questionFeedback.style.display = 'none';
+            nextBtn.classList.remove('show');
+            nextBtn.style.display = 'none';
+            
+            question.answers.forEach((answer, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'answer-btn';
+                btn.type = 'button';
+                btn.setAttribute('data-index', index);
+                btn.innerHTML = `
+                    <span class="answer-letter">${String.fromCharCode(65 + index)}</span>
+                    <span class="answer-text">${answer}</span>
+                `;
+                
+                // CORRECTION: Utiliser onclick directement
+                btn.onclick = function() {
+                    selectAnswer(index);
+                };
+                
+                answersGrid.appendChild(btn);
+            });
+            
+            console.log('Question chargée:', currentQuestionIndex + 1);
+        }
+        
+        // Fonction pour sélectionner une réponse - CORRIGÉE
+        function selectAnswer(answerIndex) {
+            console.log('Réponse sélectionnée:', answerIndex, 'answered:', answered);
+            
+            if (answered) {
+                console.log('Déjà répondu, on ignore');
+                return;
+            }
+            
+            answered = true;
+            
+            const question = quizData[currentQuestionIndex];
+            const isCorrect = answerIndex === question.correct;
+            
+            console.log('Correct?', isCorrect, 'Index correct:', question.correct);
+            
+            // Mise à jour du score
+            if (isCorrect) {
+                score++;
+                updateScore();
+            }
+            
+            // Mise à jour visuelle des réponses
+            const buttons = answersGrid.querySelectorAll('.answer-btn');
+            buttons.forEach((btn, index) => {
+                btn.classList.add('disabled');
+                btn.style.pointerEvents = 'none';
+                
+                if (index === question.correct) {
+                    btn.classList.add('correct');
+                } else if (index === answerIndex && !isCorrect) {
+                    btn.classList.add('incorrect');
+                }
+            });
+            
+            // Affichage du feedback
+            questionFeedback.style.display = 'block';
+            questionFeedback.className = 'question-feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+            feedbackTitle.innerHTML = isCorrect 
+                ? '✅ Bonne réponse !' 
+                : '❌ Mauvaise réponse';
+            feedbackText.textContent = question.explanation;
+            
+            // Affichage du bouton suivant
+            nextBtn.style.display = 'inline-flex';
+            setTimeout(() => {
+                nextBtn.classList.add('show');
+            }, 100);
+        }
+        
+        // Fonction pour passer à la question suivante
+        function nextQuestion() {
+            currentQuestionIndex++;
+            
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+        
+        // Mise à jour du score affiché
+        function updateScore() {
+            currentScoreEl.textContent = score;
+        }
+        
+        // Affichage des résultats
+        function showResults() {
+            quizGame.style.display = 'none';
+            quizGame.classList.remove('active');
+            quizResults.style.display = 'block';
+            quizResults.classList.add('active');
+            
+            // Mise à jour des résultats
+            const resultScore = document.getElementById('resultScore');
+            const resultIcon = document.getElementById('resultIcon');
+            const resultMessage = document.getElementById('resultMessage');
+            const resultSubtitle = document.getElementById('resultSubtitle');
+            
+            resultScore.textContent = `${score}/${quizData.length}`;
+            
+            // Messages selon le score
+            if (score === quizData.length) {
+                resultIcon.textContent = '🏆';
+                resultMessage.textContent = 'Parfait ! Vous êtes un expert !';
+                resultSubtitle.textContent = 'Score parfait, félicitations !';
+            } else if (score >= 8) {
+                resultIcon.textContent = '🌟';
+                resultMessage.textContent = 'Excellent travail !';
+                resultSubtitle.textContent = 'Vous avez de solides connaissances en informatique.';
+            } else if (score >= 6) {
+                resultIcon.textContent = '👍';
+                resultMessage.textContent = 'Bien joué !';
+                resultSubtitle.textContent = 'Vous avez les bases, mais il reste à progresser.';
+            } else if (score >= 4) {
+                resultIcon.textContent = '📚';
+                resultMessage.textContent = 'Continuez à apprendre !';
+                resultSubtitle.textContent = 'Vos connaissances sont à consolider.';
+            } else {
+                resultIcon.textContent = '💪';
+                resultMessage.textContent = 'Ne lâchez rien !';
+                resultSubtitle.textContent = "L'informatique n'a plus de secrets pour personne avec de l'entraînement.";
+            }
+            
+            // Mise à jour du diplôme
+            const diplomaGrade = document.getElementById('diplomaGrade');
+            const diplomaDate = document.getElementById('diplomaDate');
+            
+            diplomaGrade.textContent = `${score}/${quizData.length}`;
+            
+            // Date actuelle
+            const now = new Date();
+            diplomaDate.textContent = `Date: ${now.toLocaleDateString('fr-FR')}`;
+            
+            console.log('Résultats affichés, score:', score);
+        }
+        
+        // Événements - CORRIGÉS
+        if (startBtn) {
+            startBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                startQuiz();
+            });
+        }
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                nextQuestion();
+            });
+        }
+        
+        if (restartBtn) {
+            restartBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                startQuiz();
+            });
+        }
+        
+        console.log('Quiz initialisé !');
+        
+    })();
+    </script>
+
+    <script>
+        // Mobile Menu Toggle
+        (function() {
+            var menuToggle = document.getElementById('menuToggle');
+            var mobileMenu = document.getElementById('mobileMenu');
+            var mobileOverlay = document.getElementById('mobileOverlay');
+            var mobileClose = document.getElementById('mobileClose');
+
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var isActive = mobileMenu.classList.contains('active');
+
+                    menuToggle.classList.toggle('active');
+                    mobileMenu.classList.toggle('active');
+                    if (mobileOverlay) mobileOverlay.classList.toggle('active');
+                    document.body.style.overflow = isActive ? '' : 'hidden';
+                });
+            }
+
+            if (mobileClose && mobileMenu) {
+                mobileClose.addEventListener('click', function() {
+                    menuToggle.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    if (mobileOverlay) mobileOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+
+            if (mobileOverlay && mobileMenu) {
+                mobileOverlay.addEventListener('click', function() {
+                    menuToggle.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    mobileOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+
+            // Close on link click
+            var mobileLinks = document.querySelectorAll('.nav-mobile-link');
+            mobileLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (mobileMenu) {
+                        menuToggle.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                        if (mobileOverlay) mobileOverlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+
+            // Close on Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && mobileMenu) {
+                    menuToggle.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    if (mobileOverlay) mobileOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

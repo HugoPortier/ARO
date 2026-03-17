@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infogérance | AroData - Externalisation informatique</title>
+    <meta name="description" content="Infogérance informatique pour entreprises. Externalisez la gestion de votre infrastructure IT avec AroData. Supervision 24/7, maintenance proactive.">
+    <link rel="icon" type="image/png" href="logo-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.min.css">
+    <style>
+        .service-detail-page { padding-top: 100px; }
+        .service-hero { padding: 80px 0; background: linear-gradient(180deg, rgba(0, 212, 255, 0.1) 0%, transparent 100%); text-align: center; }
+        .service-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 20px; }
+        .service-hero h1 span { background: linear-gradient(135deg, #00d4ff 0%, #00a8cc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .service-hero p { font-size: 1.125rem; color: rgba(255, 255, 255, 0.7); max-width: 700px; margin: 0 auto 30px; }
+        .service-content { padding: 60px 0; }
+        .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+        @media (max-width: 968px) { .service-grid { grid-template-columns: 1fr; gap: 40px; } }
+        .service-description h2 { font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 20px; color: #fff; }
+        .service-description p { color: rgba(255, 255, 255, 0.8); line-height: 1.8; margin-bottom: 20px; }
+        .service-features-list { list-style: none; margin: 30px 0; }
+        .service-features-list li { padding: 12px 0; padding-left: 35px; position: relative; color: rgba(255, 255, 255, 0.9); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .service-features-list li::before { content: '✓'; position: absolute; left: 0; width: 24px; height: 24px; background: rgba(0, 212, 255, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #00d4ff; font-weight: bold; font-size: 0.875rem; }
+        .service-card-sidebar { background: linear-gradient(145deg, rgba(13, 31, 60, 0.9) 0%, rgba(7, 15, 26, 0.95) 100%); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 20px; padding: 35px; position: sticky; top: 120px; }
+        .service-card-sidebar h3 { font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 20px; color: #fff; }
+        .service-price { font-size: 2.5rem; font-weight: 700; color: #00d4ff; margin-bottom: 5px; }
+        .service-price span { font-size: 1rem; color: rgba(255, 255, 255, 0.6); font-weight: 400; }
+        .service-card-sidebar .btn { width: 100%; margin-top: 25px; justify-content: center; }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress"><div class="scroll-progress-bar"></div></div>
+    <header class="header" id="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="logo-arodata.png" alt="AroData" class="logo-img">
+            </a>
+
+            <nav class="nav-desktop">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Accueil</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="fai.html" class="nav-link">FAI</a></li>
+                    <li><a href="telephonie-ip.html" class="nav-link">Téléphonie</a></li>
+                    <li><a href="operateur-mobile.html" class="nav-link">Mobile</a></li>
+                    <li><a href="wifi-hotels.html" class="nav-link">WiFi</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="quiz.html" class="nav-link nav-link-featured">Quiz</a></li>
+                    <li><a href="https://anydesk.com/fr/downloads/thank-you?dv=win_exe" class="nav-link nav-link-assistance" target="_blank">Assistance</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <a href="index.html#contact" class="btn btn-primary btn-header">Devis gratuit</a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu" onclick="
+                var menu = document.getElementById('mobileMenu');
+                var overlay = document.getElementById('mobileOverlay');
+                var isOpen = menu.classList.contains('active');
+                if (isOpen) {
+                    menu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    this.classList.remove('active');
+                    document.body.style.overflow = '';
+                } else {
+                    menu.classList.add('active');
+                    overlay.classList.add('active');
+                    this.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            ">
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+            </button>
+        </div>
+
+        <div class="mobile-menu-overlay" id="mobileOverlay" onclick="
+            document.getElementById('mobileMenu').classList.remove('active');
+            this.classList.remove('active');
+            document.getElementById('menuToggle').classList.remove('active');
+            document.body.style.overflow = '';
+        "></div>
+        <nav class="nav-mobile" id="mobileMenu">
+            <div class="nav-mobile-header">
+                <a href="index.html" class="nav-mobile-logo">
+                    <img src="logo-arodata.png" alt="AroData">
+                </a>
+                <button class="nav-mobile-close" id="mobileClose" aria-label="Fermer" onclick="
+                    document.getElementById('mobileMenu').classList.remove('active');
+                    document.getElementById('mobileOverlay').classList.remove('active');
+                    document.getElementById('menuToggle').classList.remove('active');
+                    document.body.style.overflow = '';
+                ">&times;</button>
+            </div>
+            <ul class="nav-mobile-list">
+                <li><a href="index.html" class="nav-mobile-link"><span class="nav-mobile-icon">🏠</span> Accueil</a></li>
+                <li><a href="services.html" class="nav-mobile-link"><span class="nav-mobile-icon">⚡</span> Services</a></li>
+                <li><a href="fai.html" class="nav-mobile-link"><span class="nav-mobile-icon">🌐</span> FAI FTTH/FTTO</a></li>
+                <li><a href="telephonie-ip.html" class="nav-mobile-link"><span class="nav-mobile-icon">📞</span> Téléphonie IP</a></li>
+                <li><a href="operateur-mobile.html" class="nav-mobile-link"><span class="nav-mobile-icon">📱</span> Mobile</a></li>
+                <li><a href="wifi-hotels.html" class="nav-mobile-link"><span class="nav-mobile-icon">📡</span> WiFi Hôtel</a></li>
+                <li><a href="blog.html" class="nav-mobile-link"><span class="nav-mobile-icon">📰</span> Blog & FAQ</a></li>
+                <li><a href="quiz.html" class="nav-mobile-link"><span class="nav-mobile-icon">🎯</span> Quiz IT</a></li>
+                <li><a href="https://anydesk.com/fr/downloads/thank-you?dv=win_exe" class="nav-mobile-link nav-mobile-assistance" target="_blank"><span class="nav-mobile-icon">🛠️</span> Assistance</a></li>
+            </ul>
+            <div class="nav-mobile-footer">
+                <a href="index.html#contact" class="btn btn-primary">Demander un devis</a>
+                <div class="nav-mobile-contact">
+                    <a href="tel:+33493000000">04 93 00 00 00</a>
+                    <a href="mailto:contact@arodata.fr">contact@arodata.fr</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="service-detail-page">
+        <section class="service-hero">
+            <div class="container">
+                <h1>Infogérance <span>Informatique</span></h1>
+                <p>Externalisation complète de votre informatique. Nous gérons votre infrastructure, serveurs, postes de travail et assurons la sécurité de vos données 24h/24 et 7j/7.</p>
+                <a href="index.html#contact" class="btn btn-primary btn-lg"><span>Demander un devis</span></a>
+            </div>
+        </section>
+        
+        <section class="service-content">
+            <div class="container">
+                <div class="service-grid">
+                    <div class="service-description">
+                        <h2>L'infogérance par AroData</h2>
+                        <p>L'infogérance est la externalisation de la gestion de votre système d'information à un prestataire spécialisé. AroData prend en charge la maintenance, la sécurité, le support utilisateur et l'optimisation de votre infrastructure IT.</p>
+                        <p>Notre équipe d'experts certifiés supervise votre parc informatique en permanence, anticipe les pannes et intervient rapidement en cas d'incident. Vous vous concentrez sur votre cœur de métier, nous gérons votre informatique.</p>
+                        
+                        <h2 style="margin-top: 40px;">Nos engagements</h2>
+                        <ul class="service-features-list">
+                            <li><strong>Supervision 24/7</strong> - Monitoring permanent de vos serveurs et équipements</li>
+                            <li><strong>Maintenance proactive</strong> - Prévention des pannes avant qu'elles n'arrivent</li>
+                            <li><strong>Support utilisateur illimité</strong> - Hotline et prise en main à distance</li>
+                            <li><strong>Sécurité renforcée</strong> - Antivirus, pare-feu, sauvegardes automatisées</li>
+                            <li><strong>Reporting mensuel</strong> - Bilan d'activité et recommandations</li>
+                            <li><strong>Intervention sous 4h</strong> - Engagement de réactivité contractuel</li>
+                        </ul>
+                    </div>
+                    
+                    <aside class="service-card-sidebar">
+                        <h3>Forfait Infogérance</h3>
+                        <div class="service-price">Sur mesure</div>
+                        <p style="color: rgba(255,255,255,0.6); font-size: 0.875rem; margin-bottom: 20px;">À partir de 500€/mois selon votre parc</p>
+                        <ul style="list-style: none; margin-bottom: 20px;">
+                            <li style="padding: 8px 0; color: rgba(255,255,255,0.9); border-bottom: 1px solid rgba(255,255,255,0.1);">✓ Supervision 24/7</li>
+                            <li style="padding: 8px 0; color: rgba(255,255,255,0.9); border-bottom: 1px solid rgba(255,255,255,0.1);">✓ Support illimité</li>
+                            <li style="padding: 8px 0; color: rgba(255,255,255,0.9); border-bottom: 1px solid rgba(255,255,255,0.1);">✓ Maintenance proactive</li>
+                            <li style="padding: 8px 0; color: rgba(255,255,255,0.9);">✓ Sauvegardes incluses</li>
+                        </ul>
+                        <a href="index.html#contact" class="btn btn-primary"><span>Demander un devis</span></a>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <p class="footer-copyright">© 2026 AroData - <a href="mentions-legales.html">Mentions légales</a></p>
+                    <p class="footer-credit">Expert en infogérance, téléphonie IP et opérateur mobile</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <button class="back-to-top" id="backToTop" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg></button>
+    <script src="script.js"></script>
+
+    <script>
+        // Mobile Menu Toggle
+        (function() {
+            var menuToggle = document.getElementById('menuToggle');
+            var mobileMenu = document.getElementById('mobileMenu');
+            var mobileOverlay = document.getElementById('mobileOverlay');
+            var mobileClose = document.getElementById('mobileClose');
+
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var isActive = mobileMenu.classList.contains('active');
+
+                    menuToggle.classList.toggle('active');
+                    mobileMenu.classList.toggle('active');
+                    if (mobileOverlay) mobileOverlay.classList.toggle('active');
+                    document.body.style.overflow = isActive ? '' : 'hidden';
+                });
+            }
+
+            if (mobileClose && mobileMenu) {
+                mobileClose.addEventListener('click', function() {
+                    menuToggle.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    if (mobileOverlay) mobileOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+
+            if (mobileOverlay && mobileMenu) {
+                mobileOverlay.addEventListener('click', function() {
+                    menuToggle.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    mobileOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+
+            // Close on link click
+            var mobileLinks = document.querySelectorAll('.nav-mobile-link');
+            mobileLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (mobileMenu) {
+                        menuToggle.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                        if (mobileOverlay) mobileOverlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+
+            // Close on Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && mobileMenu) {
+                    menuToggle.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    if (mobileOverlay) mobileOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

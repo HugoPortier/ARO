@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="fr-FR" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & FAQ | AroData - Conseils IT, Téléphonie IP et Cybersécurité</title>
+    <meta name="description" content="Blog AroData : actualités IT, conseils cybersécurité, guides téléphonie IP, FAQ et réponses à vos questions sur l'infogérance et les services IT.">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="blog IT, FAQ informatique, conseils cybersécurité, guides téléphonie">
+    <link rel="canonical" href="https://bwd72uvef3upe.ok.kimi.link/blog.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Blog & FAQ | AroData - Conseils IT et Cybersécurité">
+    <meta property="og:description" content="Blog AroData : actualités IT, conseils cybersécurité, guides téléphonie IP, FAQ et réponses sur nos services.">
+    <meta property="og:url" content="https://bwd72uvef3upe.ok.kimi.link/blog.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AroData">
+    <meta property="og:image" content="https://bwd72uvef3upe.ok.kimi.link/logo-arodata.png">
+    <meta property="og:image:width" content="400">
+    <meta property="og:image:height" content="100">
+    <meta property="og:locale" content="fr_FR">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Blog & FAQ | AroData - Conseils IT et Cybersécurité">
+    <meta name="twitter:description" content="Blog AroData : actualités IT, conseils cybersécurité, guides téléphonie IP, FAQ et réponses sur nos services.">
+    <meta name="twitter:image" content="https://bwd72uvef3upe.ok.kimi.link/logo-arodata.png">
+    <meta name="twitter:site" content="@arodata">
+
+    <link rel="icon" type="image/png" href="logo-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.min.css">
+    <style>
+        .blog-page { padding-top: 100px; }
+        .blog-hero { text-align: center; padding: 80px 0; background: linear-gradient(180deg, rgba(0, 212, 255, 0.1) 0%, transparent 100%); }
+        .blog-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 20px; color: #fff; }
+        .blog-hero h1 span { background: linear-gradient(135deg, #00d4ff 0%, #00a8cc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .blog-hero p { font-size: 1.125rem; color: rgba(255, 255, 255, 0.7); max-width: 700px; margin: 0 auto; }
+        
+        /* FAQ Section - Nouveau design */
+        .faq-section { padding: 80px 0; background: linear-gradient(180deg, rgba(0, 212, 255, 0.03) 0%, transparent 100%); }
+        .faq-section h2 { font-family: var(--font-display); font-size: 2.5rem; text-align: center; margin-bottom: 15px; }
+        .faq-section h2 span { background: linear-gradient(135deg, #00d4ff, #00a8cc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .faq-subtitle { text-align: center; color: rgba(255, 255, 255, 0.6); margin-bottom: 50px; font-size: 1.1rem; }
+        
+        .faq-container { max-width: 900px; margin: 0 auto; }
+        .faq-item { 
+            background: linear-gradient(145deg, rgba(13, 31, 60, 0.9) 0%, rgba(7, 15, 26, 0.95) 100%); 
+            border: 1px solid rgba(0, 212, 255, 0.15); 
+            border-radius: 16px; 
+            margin-bottom: 16px; 
+            overflow: hidden; 
+            transition: all 0.3s ease; 
+        }
+        .faq-item:hover { border-color: rgba(0, 212, 255, 0.3); box-shadow: 0 4px 20px rgba(0, 212, 255, 0.1); }
+        .faq-item.active { border-color: rgba(0, 212, 255, 0.4); box-shadow: 0 8px 30px rgba(0, 212, 255, 0.15); }
+        
+        .faq-question { 
+            width: 100%; 
+            padding: 24px 28px; 
+            background: none; 
+            border: none; 
+            color: #fff; 
+            font-family: var(--font-display); 
+            font-size: 1.1rem; 
+            font-weight: 600; 
+            text-align: left; 
+            cursor: pointer; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            gap: 20px; 
+        }
+        .faq-icon { 
+            width: 32px; 
+            height: 32px; 
+            background: rgba(0, 212, 255, 0.1); 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: #00d4ff; 
+            font-size: 1.2rem; 
+            flex-shrink: 0; 
+            transition: all 0.3s ease; 
+        }
+        .faq-item.active .faq-icon { background: #00d4ff; color: #0a1628; transform: rotate(45deg); }
+        
+        .faq-answer { 
+            max-height: 0; 
+            overflow: hidden; 
+            transition: max-height 0.4s ease, padding 0.4s ease; 
+        }
+        .faq-answer-content { 
+            padding: 0 28px 28px; 
+            color: rgba(255, 255, 255, 0.75); 
+            line-height: 1.8; 
+            font-size: 0.95rem;
+        }
+        .faq-answer-content p { margin-bottom: 15px; }
+        .faq-answer-content p:last-child { margin-bottom: 0; }
+        .faq-answer-content ul { 
+            margin: 15px 0; 
+            padding-left: 20px; 
+            list-style: none;
+        }
+        .faq-answer-content li { 
+            padding: 8px 0; 
+            padding-left: 28px; 
+            position: relative; 
+        }
+        .faq-answer-content li::before { 
+            content: '→'; 
+            position: absolute; 
+            left: 0; 
+            color: #00d4ff; 
+            font-weight: bold; 
+        }
+        .faq-item.active .faq-answer { max-height: 2000px; }
+        
+        /* Blog Articles */
+        .blog-section { padding: 80px 0; }
+        .blog-section h2 { font-family: var(--font-display); font-size: 2.5rem; text-align: center; margin-bottom: 15px; }
+        .blog-section h2 span { background: linear-gradient(135deg, #00d4ff, #00a8cc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .blog-section > .container > p { text-align: center; color: rgba(255, 255, 255, 0.6); margin-bottom: 50px; }
+        
+        .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        @media (max-width: 968px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .blog-grid { grid-template-columns: 1fr; } }
+        
+        .blog-card { 
+            background: linear-gradient(145deg, rgba(13, 31, 60, 0.9) 0%, rgba(7, 15, 26, 0.95) 100%); 
+            border: 1px solid rgba(0, 212, 255, 0.15); 
+            border-radius: 20px; 
+            overflow: hidden; 
+            transition: all 0.3s ease; 
+        }
+        .blog-card:hover { transform: translateY(-10px); border-color: rgba(0, 212, 255, 0.4); box-shadow: 0 20px 40px rgba(0, 212, 255, 0.15); }
+        .blog-card-image { height: 180px; background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 100, 200, 0.3)); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .blog-card-image::before { content: ''; position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at 30% 30%, rgba(0, 212, 255, 0.3), transparent 50%); }
+        .blog-card-image svg { width: 60px; height: 60px; color: #00d4ff; position: relative; z-index: 1; }
+        .blog-card-content { padding: 25px; }
+        .blog-card-meta { display: flex; gap: 15px; margin-bottom: 15px; font-size: 0.8rem; color: rgba(255, 255, 255, 0.5); }
+        .blog-card-category { color: #00d4ff; font-weight: 600; }
+        .blog-card h3 { font-family: var(--font-display); font-size: 1.125rem; margin-bottom: 12px; color: #fff; line-height: 1.4; }
+        .blog-card p { color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px; }
+        .blog-card-link { display: inline-flex; align-items: center; gap: 8px; color: #00d4ff; font-weight: 600; font-size: 0.9rem; transition: gap 0.3s ease; }
+        .blog-card-link:hover { gap: 12px; }
+        
+        /* Contact CTA */
+        .blog-cta { padding: 100px 0; text-align: center; background: linear-gradient(180deg, transparent 0%, rgba(0, 212, 255, 0.05) 100%); }
+        .blog-cta h2 { font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 20px; }
+        .blog-cta p { color: rgba(255, 255, 255, 0.7); margin-bottom: 30px; max-width: 500px; margin-left: auto; margin-right: auto; font-size: 1.1rem; }
+    </style>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Blog AroData",
+    "description": "Actualités IT, conseils cybersécurité, guides téléphonie IP et FAQ",
+    "url": "https://bwd72uvef3upe.ok.kimi.link/blog.html",
+    "publisher": {
+        "@type": "Organization",
+        "name": "AroData"
+    }
+}
+</script>
+</head>
+<body>
+    <div class="scroll-progress"><div class="scroll-progress-bar"></div></div>
+    
+    <header class="header" id="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="logo-arodata.png" alt="AroData" class="logo-img">
+            </a>
+
+            <nav class="nav-desktop">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Accueil</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="fai.html" class="nav-link">FAI</a></li>
+                    <li><a href="telephonie-ip.html" class="nav-link">Téléphonie</a></li>
+                    <li><a href="operateur-mobile.html" class="nav-link">Mobile</a></li>
+                    <li><a href="wifi-hotels.html" class="nav-link">WiFi</a></li>
+                    <li><a href="blog.html" class="nav-link active">Blog</a></li>
+                    <li><a href="quiz.html" class="nav-link nav-link-featured">Quiz</a></li>
+                    <li><a href="https://anydesk.com/fr/downloads/thank-you?dv=win_exe" class="nav-link nav-link-assistance" target="_blank">Assistance</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <a href="index.html#contact" class="btn btn-primary btn-header">Devis gratuit</a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu" onclick="
+                var menu = document.getElementById('mobileMenu');
+                var overlay = document.getElementById('mobileOverlay');
+                var isOpen = menu.classList.contains('active');
+                if (isOpen) {
+                    menu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    this.classList.remove('active');
+                    document.body.style.overflow = '';
+                } else {
+                    menu.classList.add('active');
+                    overlay.classList.add('active');
+                    this.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            ">
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+            </button>
+        </div>
+
+        <div class="mobile-menu-overlay" id="mobileOverlay" onclick="
+            document.getElementById('mobileMenu').classList.remove('active');
+            this.classList.remove('active');
+            document.getElementById('menuToggle').classList.remove('active');
+            document.body.style.overflow = '';
+        "></div>
+        <nav class="nav-mobile" id="mobileMenu">
+            <div class="nav-mobile-header">
+                <a href="index.html" class="nav-mobile-logo">
+                    <img src="logo-arodata.png" alt="AroData">
+                </a>
+                <button class="nav-mobile-close" id="mobileClose" aria-label="Fermer" onclick="
+                    document.getElementById('mobileMenu').classList.remove('active');
+                    document.getElementById('mobileOverlay').classList.remove('active');
+                    document.getElementById('menuToggle').classList.remove('active');
+                    document.body.style.overflow = '';
+                ">&times;</button>
+            </div>
+            <ul class="nav-mobile-list">
+                <li><a href="index.html" class="nav-mobile-link"><span class="nav-mobile-icon">🏠</span> Accueil</a></li>
+                <li><a href="services.html" class="nav-mobile-link"><span class="nav-mobile-icon">⚡</span> Services</a></li>
+                <li><a href="fai.html" class="nav-mobile-link"><span class="nav-mobile-icon">🌐</span> FAI FTTH/FTTO</a></li>
+                <li><a href="telephonie-ip.html" class="nav-mobile-link"><span class="nav-mobile-icon">📞</span> Téléphonie IP</a></li>
+                <li><a href="operateur-mobile.html" class="nav-mobile-link"><span class="nav-mobile-icon">📱</span> Mobile</a></li>
+                <li><a href="wifi-hotels.html" class="nav-mobile-link"><span class="nav-mobile-icon">📡</span> WiFi Hôtel</a></li>
+                <li><a href="blog.html" class="nav-mobile-link active"><span class="nav-mobile-icon">📰</span> Blog & FAQ</a></li>
+                <li><a href="quiz.html" class="nav-mobile-link"><span class="nav-mobile-icon">🎯</span> Quiz IT</a></li>
+                <li><a href="https://anydesk.com/fr/downloads/thank-you?dv=win_exe" class="nav-mobile-link nav-mobile-assistance" target="_blank"><span class="nav-mobile-icon">🛠️</span> Assistance</a></li>
+            </ul>
+            <div class="nav-mobile-footer">
+                <a href="index.html#contact" class="btn btn-primary">Demander un devis</a>
+                <div class="nav-mobile-contact">
+                    <a href="tel:+33493000000">04 93 00 00 00</a>
+                    <a href="mailto:contact@arodata.fr">contact@arodata.fr</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="blog-page">
+        <!-- Hero -->
+        <section class="blog-hero">
+            <div class="container">
+                <h1>Blog & <span>FAQ</span></h1>
+                <p>Actualités IT, conseils cybersécurité, guides pratiques et réponses aux questions fréquentes sur nos services.</p>
+            </div>
+        </section>
+        
+        <!-- FAQ Section Complète -->
+        <section class="faq-section" id="faq">
+            <div class="container">
+                <h2>Questions <span>fréquentes</span></h2>
+                <p class="faq-subtitle">Trouvez les réponses aux questions les plus courantes sur nos services IT</p>
+                
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Qu'est-ce que l'infogérance et pourquoi mon entreprise en a-t-elle besoin ?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p><strong>L'infogérance est l'externalisation complète de la gestion de votre système d'information.</strong> Au lieu d'embaucher un technicien interne ou de gérer vous-même vos problèmes informatiques, vous confiez cette mission à une équipe d'experts dédiés.</p>
+                                <p><strong>Les avantages sont nombreux :</strong></p>
+                                <ul>
+                                    <li><strong>Réduction des coûts :</strong> Pas de salaire à payer, pas de formation à assurer, pas de remplacement en cas d'absence</li>
+                                    <li><strong>Expertise diversifiée :</strong> Accès à des spécialistes dans tous les domaines (réseau, sécurité, cloud, téléphonie)</li>
+                                    <li><strong>Réactivité 24/7 :</strong> Une équipe disponible à tout moment pour résoudre vos incidents</li>
+                                    <li><strong>Maintenance proactive :</strong> Détection et résolution des problèmes avant qu'ils n'impactent votre activité</li>
+                                    <li><strong>Concentration sur votre métier :</strong> Vous pouvez vous focaliser sur votre cœur de business</li>
+                                </ul>
+                                <p>Chez AroData, notre contrat d'infogérance inclut la supervision 24/7, la maintenance préventive, le support utilisateur illimité, la gestion des sauvegardes et la sécurisation de votre infrastructure.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Quelle est la différence entre FTTH et FTTO ? Laquelle choisir ?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p><strong>FTTH (Fiber To The Home)</strong> et <strong>FTTO (Fiber To The Office)</strong> sont deux technologies de connexion fibre optique, mais avec des différences importantes :</p>
+                                <p><strong>FTTH - Fibre jusqu'au local :</strong></p>
+                                <ul>
+                                    <li>Fibre partagée entre plusieurs utilisateurs (jusqu'à 128 logements/entreprises)</li>
+                                    <li>Débits jusqu'à 2 Gbps symétriques</li>
+                                    <li>Solution économique idéale pour les PME et TPE</li>
+                                    <li>SLA standard (garantie de service)</li>
+                                    <li>Tarifs à partir de 49€/mois</li>
+                                </ul>
+                                <p><strong>FTTO - Fibre dédiée au bureau :</strong></p>
+                                <ul>
+                                    <li>Fibre non partagée, dédiée exclusivement à votre entreprise</li>
+                                    <li>Débits jusqu'à 10 Gbps symétriques</li>
+                                    <li>Garantie de bande passante contractuelle</li>
+                                    <li>SLA renforcé avec engagement de temps de réparation</li>
+                                    <li>Idéal pour les entreprises avec des besoins critiques</li>
+                                </ul>
+                                <p><strong>Comment choisir ?</strong> Si vous êtes une PME de moins de 20 personnes avec une utilisation standard (bureautique, email, visioconférence occasionnelle), le FTTH suffit. Si vous avez des besoins critiques (téléphonie sur IP, vidéosurveillance, serveurs hébergés, visioconférence intensive), optez pour le FTTO.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            La téléphonie IP est-elle fiable pour une entreprise ? Quels sont les avantages ?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p><strong>Absolument, la téléphonie IP est aujourd'hui la norme pour les entreprises modernes.</strong> Elle est non seulement fiable mais offre des avantages considérables par rapport à la téléphonie traditionnelle.</p>
+                                <p><strong>Avantages de la téléphonie IP :</strong></p>
+                                <ul>
+                                    <li><strong>Économies substantielles :</strong> Réduction des factures téléphoniques jusqu'à 50%, appels internes gratuits, forfaits illimités vers fixes et mobiles</li>
+                                    <li><strong>Mobilité totale :</strong> Vos collaborateurs peuvent utiliser leur numéro pro depuis n'importe où avec l'application mobile</li>
+                                    <li><strong>Fonctionnalités avancées :</strong> Standard automatique, messagerie vocale par email, conférence à plusieurs, transfert d'appel intelligent</li>
+                                    <li><strong>Évolutivité :</strong> Ajoutez ou supprimez des lignes en quelques clics, sans intervention technique</li>
+                                    <li><strong>Intégration CRM :</strong> Connectez votre téléphonie à votre logiciel de gestion pour identifier automatiquement les appelants</li>
+                                </ul>
+                                <p><strong>Fiabilité :</strong> Avec une connexion Internet de qualité et une configuration professionnelle, la qualité audio est équivalente voire supérieure à la téléphonie analogique. Nous proposons également des solutions de secours (redondance 4G) pour garantir la continuité de service.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Quels sont les avantages concrets du DSI externalisé ?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p><strong>Le DSI (Directeur des Systèmes d'Information) externalisé vous donne accès à une expertise de niveau entreprise sans les contraintes d'un recrutement.</strong></p>
+                                <p><strong>Comparaison des coûts :</strong></p>
+                                <ul>
+                                    <li><strong>DSI interne :</strong> 60 000€ à 80 000€ brut/an + charges (≈100 000€ coût total) + formation continue + risque de départ</li>
+                                    <li><strong>DSI externalisé AroData :</strong> À partir de 1 500€/mois (18 000€/an) sans aucun engagement de durée</li>
+                                </ul>
+                                <p><strong>Missions du DSI externalisé :</strong></p>
+                                <ul>
+                                    <li>Élaboration de la stratégie informatique alignée sur vos objectifs business</li>
+                                    <li>Pilotage des projets IT (déménagement, changement de logiciel, migration cloud)</li>
+                                    <li>Gestion du budget informatique et optimisation des dépenses</li>
+                                    <li>Supervision des équipes et des prestataires IT</li>
+                                    <li>Gouvernance de la sécurité et conformité (RGPD, ISO 27001)</li>
+                                    <li>Conseil sur les innovations technologiques pertinentes pour votre secteur</li>
+                                </ul>
+                                <p><strong>L'avantage majeur :</strong> Vous bénéficiez d'une expertise diversifiée (stratégie, sécurité, réseau, développement) alors qu'un DSI interne ne peut maîtriser tous ces domaines seul.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Comment protéger efficacement mon entreprise contre les ransomwares ?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p><strong>La protection contre les ransomwares repose sur une approche en plusieurs couches (défense en profondeur).</strong> Voici les mesures essentielles :</p>
+                                <p><strong>1. Sauvegardes 3-2-1 (indispensable) :</strong></p>
+                                <ul>
+                                    <li>3 copies de vos données importantes</li>
+                                    <li>Sur 2 supports différents (local + cloud)</li>
+                                    <li>1 copie hors site (déconnectée du réseau)</li>
+                                    <li>Testez régulièrement la restauration !</li>
+                                </ul>
+                                <p><strong>2. Sécurité technique :</strong></p>
+                                <ul>
+                                    <li>Antivirus/antimalware professionnel à jour sur tous les postes</li>
+                                    <li>Pare-feu nouvelle génération avec filtrage des menaces</li>
+                                    <li>Segmentation réseau (si un poste est infecté, le ransomware ne se propage pas)</li>
+                                    <li>Authentification multi-facteurs (MFA) pour tous les accès</li>
+                                    <li>Mises à jour automatiques des systèmes et logiciels</li>
+                                </ul>
+                                <p><strong>3. Formation et sensibilisation :</strong></p>
+                                <ul>
+                                    <li>90% des ransomwares entrent par le phishing (email malveillant)</li>
+                                    <li>Formez vos collaborateurs à reconnaître les tentatives d'hameçonnage</li>
+                                    <li>Simulez régulièrement des attaques pour tester la vigilance</li>
+                                </ul>
+                                <p><strong>4. Plan de réponse :</strong> Préparez-vous au pire avec un plan d'urgence documenté. Chez AroData, nous proposons des audits de sécurité complets et des solutions de protection gérées.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Quel débit Internet faut-il pour mon entreprise ?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p><strong>Le débit nécessaire dépend de votre taille, de votre activité et de vos usages.</strong> Voici nos recommandations :</p>
+                                <p><strong>Petites structures (5-10 utilisateurs) :</strong></p>
+                                <ul>
+                                    <li><strong>100-200 Mbps</strong> pour une bureautique standard (email, navigation, cloud léger)</li>
+                                    <li><strong>300-500 Mbps</strong> si visioconférence régulière ou partage de fichiers volumineux</li>
+                                </ul>
+                                <p><strong>Structures moyennes (10-30 utilisateurs) :</strong></p>
+                                <ul>
+                                    <li><strong>500 Mbps - 1 Gbps</strong> pour une utilisation professionnelle avec cloud et visioconférence</li>
+                                    <li>Privilégiez la <strong>symétrie</strong> (même débit montant/descendant) si vous utilisez la téléphonie IP</li>
+                                </ul>
+                                <p><strong>Grandes structures (30+ utilisateurs) ou besoins spécifiques :</strong></p>
+                                <ul>
+                                    <li><strong>1-2 Gbps</strong> pour les entreprises avec nombreux collaborateurs connectés simultanément</li>
+                                    <li><strong>2-10 Gbps</strong> pour les structures avec serveurs hébergés en interne, vidéo 4K, ou besoins critiques</li>
+                                </ul>
+                                <p><strong>Facteurs à considérer :</strong></p>
+                                <ul>
+                                    <li><strong>Téléphonie IP :</strong> Nécessite un débit montant stable (100 kbps par appel)</li>
+                                    <li><strong>Visioconférence :</strong> 2-4 Mbps par participant en vidéo HD</li>
+                                    <li><strong>Cloud et sauvegardes :</strong> Plus vous stockez dans le cloud, plus le débit montant est important</li>
+                                    <li><strong>Croissance future :</strong> Prévoyez 30-50% de marge pour votre évolution</li>
+                                </ul>
+                                <p>N'hésitez pas à nous contacter pour une étude personnalisée de vos besoins.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Proposez-vous du matériel informatique reconditionné ? Est-ce fiable ?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p><strong>Oui, notre centrale d'achat propose du matériel neuf garanti mais aussi du reconditionné professionnel de haute qualité.</strong></p>
+                                <p><strong>Qu'est-ce que le reconditionné professionnel ?</strong></p>
+                                <p>Ce sont des appareils (PC, portables, écrans) provenant de parcs informatiques d'entreprises qui renouvellent leur matériel. Ils sont :</p>
+                                <ul>
+                                    <li><strong>Testés et certifiés :</strong> Chaque appareil passe par un processus de contrôle qualité complet (80+ points de contrôle)</li>
+                                    <li><strong>Remis à neuf :</strong> Composants usés remplacés, nettoyage professionnel, réinstallation système</li>
+                                    <li><strong>Garantis :</strong> 1 an de garantie pièces et main d'œuvre, extensible à 3 ans</li>
+                                    <li><strong>Économiques :</strong> Jusqu'à 40% d'économie par rapport au neuf</li>
+                                    <li><strong>Écologiques :</strong> Réduction de l'empreinte carbone et lutte contre l'obsolescence programmée</li>
+                                </ul>
+                                <p><strong>Pour quels usages ?</strong></p>
+                                <ul>
+                                    <li>Postes de travail standard (bureautique, internet)</li>
+                                    <li>Parc de secours pour remplacements rapides</li>
+                                    <li>Équipement de collaborateurs occasionnels</li>
+                                    <li>Écoles et associations avec budget limité</li>
+                                </ul>
+                                <p><strong>Notre engagement :</strong> Tous nos appareils reconditionnés sont certifiés Grade A (excellent état esthétique et fonctionnel). Nous proposons également du matériel neuf pour les besoins spécifiques ou les configurations haut de gamme.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Quel est votre délai d'intervention en cas de panne informatique ?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p><strong>Nos engagements de réactivité sont contractuels et adaptés à la criticité de vos besoins.</strong></p>
+                                <p><strong>Temps de réponse (premier contact) :</strong></p>
+                                <ul>
+                                    <li><strong>15 minutes en moyenne</strong> pour une prise en charge à distance</li>
+                                    <li>Support disponible par téléphone, email et ticket en ligne</li>
+                                    <li>Support 24/7 pour les clients avec contrat d'infogérance</li>
+                                </ul>
+                                <p><strong>Intervention à distance :</strong></p>
+                                <ul>
+                                    <li><strong>Connexion sous 30 minutes</strong> pour la plupart des incidents</li>
+                                    <li>Résolution immédiate pour 80% des problèmes (redémarrage service, correction paramètre, etc.)</li>
+                                </ul>
+                                <p><strong>Intervention sur site :</strong></p>
+                                <ul>
+                                    <li><strong>Sous 4 heures</strong> en urgence (panne critique bloquante)</li>
+                                    <li><strong>Sous 24 heures</strong> pour les demandes standard</li>
+                                    <li><strong>Sous 48 heures</strong> pour les interventions planifiées</li>
+                                </ul>
+                                <p><strong>Notre processus :</strong> Dès réception de votre appel, nous qualifions l'incident par téléphone. Si le problème peut être résolu à distance, nous nous connectons immédiatement. Sinon, nous planifions une intervention sur site avec le matériel nécessaire. Vous recevez un rapport détaillé après chaque intervention.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Blog Articles -->
+        <section class="blog-section" id="articles">
+            <div class="container">
+                <h2>Nos derniers <span>articles</span></h2>
+                <p>Guides pratiques et conseils pour optimiser votre infrastructure IT</p>
+                <div class="blog-grid">
+                    <article class="blog-card">
+                        <div class="blog-card-image">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-card-category">Cybersécurité</span>
+                                <span>5 min de lecture</span>
+                            </div>
+                            <h3>Les 5 règles d'or pour protéger votre entreprise des cybermenaces</h3>
+                            <p>Découvrez les bonnes pratiques essentielles pour sécuriser votre infrastructure IT et protéger vos données sensibles.</p>
+                            <a href="#" class="blog-card-link" onclick="alert('Article complet bientôt disponible !')"><span>Lire l'article</span> →</a>
+                        </div>
+                    </article>
+                    
+                    <article class="blog-card">
+                        <div class="blog-card-image">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-card-category">Téléphonie IP</span>
+                                <span>4 min de lecture</span>
+                            </div>
+                            <h3>Guide complet : migrer vers la téléphonie IP en 2024</h3>
+                            <p>Tout ce que vous devez savoir pour passer à la VoIP : avantages, coûts, équipements nécessaires et étapes de la migration.</p>
+                            <a href="#" class="blog-card-link" onclick="alert('Article complet bientôt disponible !')"><span>Lire l'article</span> →</a>
+                        </div>
+                    </article>
+                    
+                    <article class="blog-card">
+                        <div class="blog-card-image">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-card-category">Connectivité</span>
+                                <span>6 min de lecture</span>
+                            </div>
+                            <h3>FTTH vs FTTO : choisir la bonne fibre pour votre entreprise</h3>
+                            <p>Comparatif détaillé des deux types de connexion fibre optique et guide pour choisir celui qui correspond à vos besoins.</p>
+                            <a href="#" class="blog-card-link" onclick="alert('Article complet bientôt disponible !')"><span>Lire l'article</span> →</a>
+                        </div>
+                    </article>
+                    
+                    <article class="blog-card">
+                        <div class="blog-card-image">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-card-category">Infogérance</span>
+                                <span>5 min de lecture</span>
+                            </div>
+                            <h3>Infogérance : pourquoi externaliser votre IT ?</h3>
+                            <p>Les bénéfices concrets de l'infogérance : réduction des coûts, accès à l'expertise, réactivité et tranquillité d'esprit.</p>
+                            <a href="#" class="blog-card-link" onclick="alert('Article complet bientôt disponible !')"><span>Lire l'article</span> →</a>
+                        </div>
+                    </article>
+                    
+                    <article class="blog-card">
+                        <div class="blog-card-image">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-card-category">Opérateur Mobile</span>
+                                <span>3 min de lecture</span>
+                            </div>
+                            <h3>Forfaits mobiles pro : comment optimiser vos coûts télécoms</h3>
+                            <p>Astuces pour réduire votre facture mobile d'entreprise tout en améliorant les services pour vos collaborateurs.</p>
+                            <a href="#" class="blog-card-link" onclick="alert('Article complet bientôt disponible !')"><span>Lire l'article</span> →</a>
+                        </div>
+                    </article>
+                    
+                    <article class="blog-card">
+                        <div class="blog-card-image">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-card-category">WiFi</span>
+                                <span>4 min de lecture</span>
+                            </div>
+                            <h3>WiFi hôtelier : offrir une connexion 5 étoiles à vos clients</h3>
+                            <p>Les clés d'un WiFi performant dans l'hôtellerie : couverture, portail captif, monetisation et conformité.</p>
+                            <a href="#" class="blog-card-link" onclick="alert('Article complet bientôt disponible !')"><span>Lire l'article</span> →</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA -->
+        <section class="blog-cta">
+            <div class="container">
+                <h2>Une question spécifique ?</h2>
+                <p>Notre équipe d'experts est à votre disposition pour répondre à toutes vos questions sur nos services IT.</p>
+                <a href="index.html#contact" class="btn btn-primary btn-lg">Nous contacter</a>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer Amélioré -->
+    <footer class="footer">
+        <div class="footer-main">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <a href="index.html" class="footer-logo"><img src="logo-arodata.png" alt="AroData" class="footer-logo-img"></a>
+                        <p class="footer-tagline">Votre partenaire IT complet depuis 5 ans. Infogérance, téléphonie, Internet, mobile et cybersécurité pour les entreprises.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/arodata/?viewAsMember=true" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                            
+                            <a href="https://www.facebook.com/profile.php?id=61567125097126" class="social-link" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                            <a href="https://www.instagram.com/arodata.fr/" class="social-link" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                        </div>
+                    </div>
+                    <div class="footer-links">
+                        <h3 class="footer-title">Services principaux</h3>
+                        <ul class="footer-list">
+                            <li><a href="infogerance.html">Infogérance</a></li>
+                            <li><a href="telephonie-ip.html">Téléphonie IP</a></li>
+                            <li><a href="fai.html">FAI FTTH/FTTO</a></li>
+                            <li><a href="operateur-mobile.html">Opérateur Mobile</a></li>
+                            <li><a href="wifi-hotels.html">WiFi Hôtel/Camping</a></li>
+                            <li><a href="cybersecurite.html">Cybersécurité</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links">
+                        <h3 class="footer-title">Autres services</h3>
+                        <ul class="footer-list">
+                            <li><a href="conception-web.html">Développement Web</a></li>
+                            <li><a href="centrale-achat.html">Centrale d'achat</a></li>
+                            <li><a href="depannage.html">Dépannage</a></li>
+                            <li><a href="dsi-externalise.html">DSI Externalisé</a></li>
+                            <li><a href="blog.html">Blog & FAQ</a></li>
+                            <li><a href="quiz.html">Quiz IT</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links">
+                        <h3 class="footer-title">Contact</h3>
+                        <ul class="footer-list footer-contact">
+                            <li><a href="tel:+33493000000">📞 04 93 00 00 00</a></li>
+                            <li><a href="mailto:contact@arodata.fr">✉️ contact@arodata.fr</a></li>
+                            <li><span>📍 273 Avenue de Pibonson<br>06250 Mougins, France</span></li>
+                            <li><span>🕐 Lun-Ven : 8h30-18h30</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <p class="footer-copyright">© 2026 AroData - <a href="mentions-legales.html">Mentions légales</a> - <a href="mentions-legales.html#donnees">Confidentialité</a></p>
+                    <p class="footer-credit">Expert en infogérance, téléphonie IP, FAI et opérateur mobile</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <button class="back-to-top" id="backToTop" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg></button>
+    <script src="script.js"></script>
+
+    <script>
+        // Mobile Menu Toggle
+        (function() {
+            var menuToggle = document.getElementById('menuToggle');
+            var mobileMenu = document.getElementById('mobileMenu');
+            var mobileOverlay = document.getElementById('mobileOverlay');
+            var mobileClose = document.getElementById('mobileClose');
+
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var isActive = mobileMenu.classList.contains('active');
+
+                    menuToggle.classList.toggle('active');
+                    mobileMenu.classList.toggle('active');
+                    if (mobileOverlay) mobileOverlay.classList.toggle('active');
+                    document.body.style.overflow = isActive ? '' : 'hidden';
+                });
+            }
+
+            if (mobileClose && mobileMenu) {
+                mobileClose.addEventListener('click', function() {
+                    menuToggle.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    if (mobileOverlay) mobileOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+
+            if (mobileOverlay && mobileMenu) {
+                mobileOverlay.addEventListener('click', function() {
+                    menuToggle.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    mobileOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+
+            // Close on link click
+            var mobileLinks = document.querySelectorAll('.nav-mobile-link');
+            mobileLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (mobileMenu) {
+                        menuToggle.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                        if (mobileOverlay) mobileOverlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+
+            // Close on Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && mobileMenu) {
+                    menuToggle.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    if (mobileOverlay) mobileOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
