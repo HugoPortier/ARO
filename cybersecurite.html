@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersécurité Entreprise | AroData - Protection Informatique Proactive</title>
+    <meta name="description" content="Solutions de cybersécurité pour entreprises. Protection contre les cyberattaques, audit de sécurité, SOC managé, conformité RGPD. Expert en sécurité informatique sur la Côte d'Azur.">
+    <meta name="keywords" content="cybersécurité entreprise, protection informatique, audit sécurité, SOC managé, pentest, conformité RGPD, sécurité IT, anti-ransomware, EDR, XDR, firewall, cybersécurité PME">
+    <link rel="icon" type="image/png" href="logo-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .service-detail-page { padding-top: 100px; }
+        .service-hero { padding: 80px 0; background: linear-gradient(180deg, rgba(0, 212, 255, 0.1) 0%, transparent 100%); text-align: center; }
+        .service-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 20px; }
+        .service-hero h1 span { background: linear-gradient(135deg, #00d4ff 0%, #00a8cc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .service-hero p { font-size: 1.125rem; color: rgba(255, 255, 255, 0.7); max-width: 700px; margin: 0 auto 30px; }
+        
+        /* Stats Section */
+        .stats-section { padding: 40px 0; background: linear-gradient(135deg, rgba(255, 0, 85, 0.1), rgba(0, 212, 255, 0.05)); }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center; }
+        @media (max-width: 968px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+        .stat-item .number { font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; color: #ff0055; display: block; }
+        .stat-item .label { color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; }
+        
+        /* Services Grid */
+        .services-section { padding: 60px 0; }
+        .services-section h2 { font-family: var(--font-display); font-size: 2rem; text-align: center; margin-bottom: 40px; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        @media (max-width: 968px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .services-grid { grid-template-columns: 1fr; } }
+        .service-card {
+            background: linear-gradient(145deg, rgba(13, 31, 60, 0.9) 0%, rgba(7, 15, 26, 0.95) 100%);
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        .service-card:hover { transform: translateY(-10px); border-color: rgba(0, 212, 255, 0.4); }
+        .service-card .icon { font-size: 3rem; margin-bottom: 15px; }
+        .service-card h3 { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 10px; color: #fff; }
+        .service-card p { color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; line-height: 1.5; }
+        
+        /* Threats Section */
+        .threats-section { padding: 60px 0; background: rgba(255, 0, 85, 0.03); }
+        .threats-section h2 { font-family: var(--font-display); font-size: 2rem; text-align: center; margin-bottom: 40px; }
+        .threats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        @media (max-width: 968px) { .threats-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .threats-grid { grid-template-columns: 1fr; } }
+        .threat-card {
+            background: linear-gradient(145deg, rgba(255, 0, 85, 0.1) 0%, rgba(13, 31, 60, 0.9) 100%);
+            border: 1px solid rgba(255, 0, 85, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+        }
+        .threat-card .icon { font-size: 2.5rem; margin-bottom: 10px; }
+        .threat-card h4 { font-family: var(--font-display); font-size: 1rem; margin-bottom: 8px; color: #ff0055; }
+        .threat-card p { color: rgba(255, 255, 255, 0.7); font-size: 0.85rem; }
+        
+        /* Content */
+        .service-content { padding: 60px 0; }
+        .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+        @media (max-width: 968px) { .service-grid { grid-template-columns: 1fr; gap: 40px; } }
+        .service-description h2 { font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 20px; color: #fff; }
+        .service-description h3 { font-family: var(--font-display); font-size: 1.25rem; margin: 30px 0 15px; color: #00d4ff; }
+        .service-description p { color: rgba(255, 255, 255, 0.8); line-height: 1.8; margin-bottom: 20px; }
+        .service-features-list { list-style: none; margin: 30px 0; }
+        .service-features-list li { padding: 12px 0; padding-left: 35px; position: relative; color: rgba(255, 255, 255, 0.9); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .service-features-list li::before { content: '✓'; position: absolute; left: 0; width: 24px; height: 24px; background: rgba(0, 212, 255, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #00d4ff; font-weight: bold; font-size: 0.875rem; }
+        
+        /* Sidebar */
+        .service-card-sidebar { background: linear-gradient(145deg, rgba(13, 31, 60, 0.9) 0%, rgba(7, 15, 26, 0.95) 100%); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 20px; padding: 35px; position: sticky; top: 120px; }
+        .service-card-sidebar h3 { font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 20px; color: #fff; }
+        .service-price { font-size: 2.5rem; font-weight: 700; color: #00d4ff; margin-bottom: 5px; }
+        .service-price span { font-size: 1rem; color: rgba(255, 255, 255, 0.6); font-weight: 400; }
+        .service-card-sidebar .btn { width: 100%; margin-top: 25px; justify-content: center; }
+        
+        /* Solutions */
+        .solutions-section { padding: 60px 0; background: rgba(0, 212, 255, 0.03); }
+        .solutions-section h2 { font-family: var(--font-display); font-size: 2rem; text-align: center; margin-bottom: 40px; }
+        .solutions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+        @media (max-width: 768px) { .solutions-grid { grid-template-columns: 1fr; } }
+        .solution-card {
+            display: flex;
+            gap: 20px;
+            background: linear-gradient(145deg, rgba(13, 31, 60, 0.9) 0%, rgba(7, 15, 26, 0.95) 100%);
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            border-radius: 15px;
+            padding: 30px;
+        }
+        .solution-card .icon { font-size: 2.5rem; flex-shrink: 0; }
+        .solution-card h3 { font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 10px; color: #00d4ff; }
+        .solution-card p { color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; line-height: 1.5; }
+        
+        /* CTA */
+        .cta-section { padding: 80px 0; background: linear-gradient(135deg, rgba(255, 0, 85, 0.1), rgba(0, 212, 255, 0.05)); text-align: center; }
+        .cta-section h2 { font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 20px; }
+        .cta-section p { color: rgba(255, 255, 255, 0.7); max-width: 600px; margin: 0 auto 30px; }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress"><div class="scroll-progress-bar"></div></div>
+    <header class="header" id="header">
+        <div class="header-container">
+            <a href="index.html" class="logo"><img src="logo-arodata.png" alt="AroData" class="logo-img" width="180" height="50"></a>
+            <nav class="nav-desktop">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Accueil</a></li>
+                    <li><a href="services.html" class="nav-link active">Services</a></li>
+                    <li><a href="quiz.html" class="nav-link nav-link-featured">Quiz IT</a></li>
+                    <li><a href="https://anydesk.com/fr/downloads/thank-you?dv=win_exe" class="nav-link nav-link-assistance" target="_blank">Assistance ↓</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="index.html#contact" class="btn btn-primary btn-header"><span>Demander un audit</span></a>
+            <button class="menu-toggle" id="menuToggle"><span class="menu-bar"></span><span class="menu-bar"></span><span class="menu-bar"></span></button>
+        </div>
+        <nav class="nav-mobile" id="mobileMenu" hidden>
+            <ul class="nav-mobile-list">
+                <li><a href="index.html" class="nav-mobile-link">Accueil</a></li>
+                <li><a href="services.html" class="nav-mobile-link active">Services</a></li>
+                <li><a href="quiz.html" class="nav-mobile-link">Quiz IT</a></li>
+                <li><a href="https://anydesk.com/fr/downloads/thank-you?dv=win_exe" class="nav-mobile-link" target="_blank">Assistance ↓</a></li>
+                <li><a href="index.html#contact" class="nav-mobile-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="service-detail-page">
+        <!-- Hero -->
+        <section class="service-hero">
+            <div class="container">
+                <h1>Cybersécurité <span>Entreprise</span></h1>
+                <p>Protégez votre entreprise contre les cybermenaces. Audit de sécurité, SOC managé, protection EDR/XDR, conformité RGPD. Une équipe d'experts certifiés à votre service 24h/24 et 7j/7.</p>
+                <a href="index.html#contact" class="btn btn-primary btn-lg"><span>Audit de sécurité gratuit</span></a>
+            </div>
+        </section>
+        
+        <!-- Stats -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="number">+60%</span>
+                        <span class="label">D'attaques en hausse</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="number">4M€</span>
+                        <span class="label">Coût moyen d'une attaque</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="number">24/7</span>
+                        <span class="label">Surveillance SOC</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="number">2h</span>
+                        <span class="label">Temps d'intervention</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Services -->
+        <section class="services-section">
+            <div class="container">
+                <h2>Nos solutions de <span style="background: linear-gradient(135deg, #00d4ff, #00a8cc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">cybersécurité</span></h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="icon">🔍</div>
+                        <h3>Audit de Sécurité</h3>
+                        <p>Évaluation complète de votre infrastructure. Tests d'intrusion, analyse des vulnérabilités, audit réseau et applications. Rapport détaillé avec recommandations prioritaires.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon">🛡️</div>
+                        <h3>SOC Managé</h3>
+                        <p>Security Operations Center dédié. Surveillance 24/7, détection des menaces en temps réel, réponse aux incidents. Protection proactive contre les cyberattaques.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon">🔐</div>
+                        <h3>EDR / XDR</h3>
+                        <p>Endpoint Detection and Response de nouvelle génération. Détection comportementale, analyse des menaces, réponse automatisée aux incidents sur tous vos postes.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon">🧪</div>
+                        <h3>Penetration Testing</h3>
+                        <p>Tests d'intrusion réalisés par des experts certifiés. Simulation d'attaques réelles pour identifier vos failles avant les hackers. Rapport exécutif et technique.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon">📋</div>
+                        <h3>Conformité RGPD</h3>
+                        <p>Accompagnement complet pour la conformité aux réglementations. Cartographie des données, registre des traitements, documentation légale, DPO externe.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon">💾</div>
+                        <h3>Sauvegarde 3-2-1</h3>
+                        <p>Stratégie de sauvegarde infaillible. 3 copies, 2 supports, 1 hors-site. Protection contre les ransomwares avec sauvegardes immuables et testées régulièrement.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Threats -->
+        <section class="threats-section">
+            <div class="container">
+                <h2>Les menaces qui <span style="color: #ff0055;">ciblent</span> votre entreprise</h2>
+                <div class="threats-grid">
+                    <div class="threat-card">
+                        <div class="icon">🦠</div>
+                        <h4>Ransomware</h4>
+                        <p>Chiffrement de vos données contre rançon. 1 entreprise sur 2 a été ciblée.</p>
+                    </div>
+                    <div class="threat-card">
+                        <div class="icon">🎣</div>
+                        <h4>Phishing</h4>
+                        <p>Hameçonnage par email. 91% des cyberattaques commencent par un phishing.</p>
+                    </div>
+                    <div class="threat-card">
+                        <div class="icon">💻</div>
+                        <h4>Malware</h4>
+                        <p>Logiciels malveillants qui volent vos données ou paralysent vos systèmes.</p>
+                    </div>
+                    <div class="threat-card">
+                        <div class="icon">👤</div>
+                        <h4>Ingénierie Sociale</h4>
+                        <p>Manipulation des employés pour obtenir des accès ou informations sensibles.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Content -->
+        <section class="service-content">
+            <div class="container">
+                <div class="service-grid">
+                    <div class="service-description">
+                        <h2>Pourquoi la cybersécurité est essentielle ?</h2>
+                        <p>Les cyberattaques sont en augmentation constante. Les PME sont particulièrement visées car elles disposent souvent de ressources de sécurité limitées tout en détenant des données précieuses. Une attaque peut paralyser votre activité, voler vos données clients et coûter des millions d'euros.</p>
+                        
+                        <h3>Notre approche Zero Trust</h3>
+                        <p>La sécurité Zero Trust repose sur un principe simple : "Ne jamais faire confiance, toujours vérifier". Chaque accès est authentifié, chaque transaction est contrôlée, chaque menace est détectée en temps réel. Cette approche moderne protège votre entreprise contre les attaques internes et externes.</p>
+                        
+                        <h2>Nos engagements sécurité</h2>
+                        <ul class="service-features-list">
+                            <li><strong>Surveillance 24/7</strong> - SOC managé avec analystes certifiés</li>
+                            <li><strong>Détection temps réel</strong> - EDR/XDR avec IA de nouvelle génération</li>
+                            <li><strong>Réponse aux incidents</strong> - Intervention rapide et remediation</li>
+                            <li><strong>Tests réguliers</strong> - Pentest et audit de vulnérabilités</li>
+                            <li><strong>Formation employés</strong> - Sensibilisation au phishing et bonnes pratiques</li>
+                            <li><strong>Conformité</strong> - RGPD, ISO 27001, LPM, NIS2</li>
+                        </ul>
+                    </div>
+                    
+                    <aside class="service-card-sidebar">
+                        <h3>Pack Cybersécurité</h3>
+                        <div class="service-price">Sur devis</div>
+                        <p style="color: rgba(255,255,255,0.6); font-size: 0.875rem; margin-bottom: 20px;">À partir de 150€/mois</p>
+                        <ul style="list-style: none; margin-bottom: 20px;">
+                            <li style="padding: 8px 0; color: rgba(255,255,255,0.9); border-bottom: 1px solid rgba(255,255,255,0.1);">✓ EDR tous postes</li>
+                            <li style="padding: 8px 0; color: rgba(255,255,255,0.9); border-bottom: 1px solid rgba(255,255,255,0.1);">✓ Firewall nouvelle génération</li>
+                            <li style="padding: 8px 0; color: rgba(255,255,255,0.9); border-bottom: 1px solid rgba(255,255,255,0.1);">✓ Email security</li>
+                            <li style="padding: 8px 0; color: rgba(255,255,255,0.9); border-bottom: 1px solid rgba(255,255,255,0.1);">✓ Sauvegardes immuables</li>
+                            <li style="padding: 8px 0; color: rgba(255,255,255,0.9);">✓ Support 24/7</li>
+                        </ul>
+                        <a href="index.html#contact" class="btn btn-primary"><span>Demander un audit</span></a>
+                    </aside>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Solutions -->
+        <section class="solutions-section">
+            <div class="container">
+                <h2>Nos technologies de <span style="background: linear-gradient(135deg, #00d4ff, #00a8cc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">pointe</span></h2>
+                <div class="solutions-grid">
+                    <div class="solution-card">
+                        <div class="icon">🔥</div>
+                        <div>
+                            <h3>Next-Gen Firewall</h3>
+                            <p>Pare-feu de nouvelle génération avec inspection profonde des paquets, filtrage applicatif, IPS/IDS intégré et protection contre les menaces zero-day.</p>
+                        </div>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">📧</div>
+                        <div>
+                            <h3>Email Security</h3>
+                            <p>Protection avancée contre le phishing, les malwares et le spam. Analyse des pièces jointes, sandboxing, authentification SPF/DKIM/DMARC.</p>
+                        </div>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">🔑</div>
+                        <div>
+                            <h3>MFA & SSO</h3>
+                            <p>Authentification multi-facteurs et Single Sign-On. Sécurisez l'accès à vos applications avec une expérience utilisateur fluide.</p>
+                        </div>
+                    </div>
+                    <div class="solution-card">
+                        <div class="icon">🌐</div>
+                        <div>
+                            <h3>VPN Sécurisé</h3>
+                            <p>Accès distant chiffré pour vos collaborateurs en télétravail. Split tunneling, kill switch, authentification forte.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ne attendez pas une attaque pour agir</h2>
+                <p>Demandez dès maintenant un audit de sécurité gratuit. Nos experts analysent votre infrastructure et vous remettent un rapport détaillé avec nos recommandations prioritaires.</p>
+                <a href="index.html#contact" class="btn btn-primary btn-lg"><span>Audit de sécurité gratuit</span></a>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <p class="footer-copyright">© 2024 AroData - SIRET 949 169 726 00013 - <a href="mentions-legales.html">Mentions légales</a></p>
+                    <p class="footer-credit">Expert en cybersécurité, infogérance et téléphonie IP</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <button class="back-to-top" id="backToTop" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg></button>
+    <script src="script.js"></script>
+</body>
+</html>
