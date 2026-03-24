@@ -2,10 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://bwd72uvef3upe.ok.kimi.link/sitemap.xml
-
-# Interdire l'accès aux fichiers sensibles
-Disallow: /mentions-legales.html
+Sitemap: https://www.arodata.fr/sitemap.xml
 
 # Autoriser les moteurs de recherche principaux
 User-agent: Googlebot

@@ -6,22 +6,49 @@
 (function() {
     'use strict';
 
+    /** URL du proxy (Cloudflare Worker, etc.) qui appelle Places API (New). Vide = avis illustratifs uniquement. */
+    var ARODATA_REVIEWS_PROXY_URL = (typeof window !== 'undefined' && window.ARODATA_REVIEWS_PROXY_URL) || '';
+
+    var GOOGLE_BUSINESS_REVIEWS_URL = 'https://www.google.com/search?q=Arodata+Mougins+avis';
+
+    var PLACEHOLDER_REVIEWS = [
+        { author: 'Sophie M.', rating: 5, text: 'Intervention rapide sur notre baie réseau et très pédagogues. Nous recommandons Arodata pour l’infogérance.', relativeTime: 'Exemple' },
+        { author: 'Thomas L.', rating: 5, text: 'Passage à la téléphonie IP sans coupure pour l’équipe. Devis clair et suivi au top.', relativeTime: 'Exemple' },
+        { author: 'Claire R.', rating: 5, text: 'Fibre FTTO et WiFi pro refaits : enfin une connexion stable pour tout le bureau.', relativeTime: 'Exemple' }
+    ];
+
     // ============================================
-    // MOBILE MENU - FONCTIONNEMENT SIMPLE
+    // NAV ACTIVE (data-active-nav sur <body>)
+    // ============================================
+    function initActiveNav() {
+        var key = document.body.getAttribute('data-active-nav');
+        if (!key) return;
+        document.querySelectorAll('.nav-link[data-nav="' + key + '"], .nav-mobile-link[data-nav="' + key + '"]').forEach(function(el) {
+            el.classList.add('active');
+        });
+    }
+
+    // ============================================
+    // MOBILE MENU
     // ============================================
     function initMobileMenu() {
-        const menuToggle = document.getElementById('menuToggle');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileOverlay = document.getElementById('mobileOverlay');
-        const mobileClose = document.getElementById('mobileClose');
+        var menuToggle = document.getElementById('menuToggle');
+        var mobileMenu = document.getElementById('mobileMenu');
+        var mobileOverlay = document.getElementById('mobileOverlay');
+        var mobileClose = document.getElementById('mobileClose');
         
         if (!menuToggle || !mobileMenu) return;
+
+        function setExpanded(open) {
+            menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
 
         function openMenu() {
             mobileMenu.classList.add('active');
             if (mobileOverlay) mobileOverlay.classList.add('active');
             menuToggle.classList.add('active');
             document.body.style.overflow = 'hidden';
+            setExpanded(true);
         }
 
         function closeMenu() {
@@ -29,9 +56,11 @@
             if (mobileOverlay) mobileOverlay.classList.remove('active');
             menuToggle.classList.remove('active');
             document.body.style.overflow = '';
+            setExpanded(false);
         }
 
-        // Ouvrir le menu
+        setExpanded(false);
+
         menuToggle.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -42,28 +71,116 @@
             }
         });
 
-        // Fermer avec le bouton X
         if (mobileClose) {
             mobileClose.addEventListener('click', closeMenu);
         }
 
-        // Fermer en cliquant sur l'overlay
         if (mobileOverlay) {
             mobileOverlay.addEventListener('click', closeMenu);
         }
 
-        // Fermer en cliquant sur un lien
-        const mobileLinks = mobileMenu.querySelectorAll('.nav-mobile-link');
-        mobileLinks.forEach(function(link) {
+        mobileMenu.querySelectorAll('.nav-mobile-link').forEach(function(link) {
             link.addEventListener('click', closeMenu);
         });
 
-        // Fermer avec la touche Escape
+        mobileMenu.querySelectorAll('.nav-mobile-footer a').forEach(function(link) {
+            link.addEventListener('click', closeMenu);
+        });
+
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
                 closeMenu();
             }
         });
+    }
+
+    function starsHtml(rating) {
+        var n = Math.round(Number(rating) || 0);
+        var out = '';
+        for (var i = 1; i <= 5; i++) {
+            out += '<span class="review-star' + (i <= n ? ' is-on' : '') + '" aria-hidden="true">★</span>';
+        }
+        return out;
+    }
+
+    function renderReviewCard(r) {
+        var author = r.author || r.authorName || 'Client';
+        if (r.authorAttribution && r.authorAttribution.displayName) author = r.authorAttribution.displayName;
+        if (author && typeof author === 'object' && author.displayName) author = author.displayName;
+        var text = '';
+        if (typeof r.text === 'string') text = r.text;
+        else if (r.text && r.text.text) text = r.text.text;
+        var when = r.relativeTime || r.relativePublishTimeDescription || '';
+        var rating = r.rating || r.starRating || 5;
+        return (
+            '<article class="review-card">' +
+            '<div class="review-card-top">' +
+            '<span class="review-author">' + escapeHtml(String(author)) + '</span>' +
+            '<div class="review-stars" aria-label="' + rating + ' sur 5">' + starsHtml(rating) + '</div>' +
+            '</div>' +
+            (when ? '<p class="review-when">' + escapeHtml(String(when)) + '</p>' : '') +
+            '<p class="review-text">' + escapeHtml(String(text)) + '</p>' +
+            '</article>'
+        );
+    }
+
+    function escapeHtml(s) {
+        return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function renderPlaceholderBlock() {
+        var list = PLACEHOLDER_REVIEWS.map(renderReviewCard).join('');
+        return (
+            '<p class="reviews-disclaimer">Avis illustratifs — dès branchement de l’API Google, seuls les avis réels s’affichent.</p>' +
+            '<div class="reviews-grid">' + list + '</div>'
+        );
+    }
+
+    function renderRealBlock(data) {
+        var reviews = data.reviews || data.items || [];
+        var summary = '';
+        if (data.rating != null) {
+            summary =
+                '<div class="reviews-summary">' +
+                '<p class="reviews-rating-big">' + Number(data.rating).toFixed(1) + ' <span>/ 5</span></p>' +
+                (data.userRatingCount ? '<p class="reviews-count">' + data.userRatingCount + ' avis Google</p>' : '') +
+                '</div>';
+        }
+        var cards = reviews.slice(0, 8).map(renderReviewCard).join('');
+        return summary + '<div class="reviews-grid">' + cards + '</div>';
+    }
+
+    function initGoogleReviews() {
+        var root = document.getElementById('googleReviewsRoot');
+        if (!root) return;
+
+        var meta = document.querySelector('meta[name="arodata-reviews-api"]');
+        var proxyUrl = (meta && meta.getAttribute('content')) || ARODATA_REVIEWS_PROXY_URL;
+        proxyUrl = (proxyUrl || '').trim();
+
+        if (!proxyUrl) {
+            root.innerHTML = renderPlaceholderBlock();
+            return;
+        }
+
+        root.innerHTML = '<p class="reviews-loading">Chargement des avis…</p>';
+        fetch(proxyUrl, { credentials: 'omit' })
+            .then(function(res) {
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.json();
+            })
+            .then(function(data) {
+                var reviews = data.reviews || data.items || [];
+                var hasContent = reviews.length > 0 || (data.rating != null);
+                if (!hasContent) throw new Error('empty');
+                root.innerHTML = renderRealBlock(data);
+                root.classList.add('reviews-root--live');
+            })
+            .catch(function() {
+                root.innerHTML =
+                    '<p class="reviews-error">Impossible de charger les avis pour le moment.</p>' +
+                    '<a class="btn btn-outline reviews-google-link" href="' + GOOGLE_BUSINESS_REVIEWS_URL + '" target="_blank" rel="noopener">Voir les avis sur Google</a>';
+            });
     }
 
     // ============================================
@@ -107,7 +224,9 @@
         window.addEventListener('scroll', function() {
             if (window.scrollY > 500) {
                 backToTop.hidden = false;
+                backToTop.classList.add('visible');
             } else {
+                backToTop.classList.remove('visible');
                 backToTop.hidden = true;
             }
         });
@@ -148,7 +267,7 @@
     // ANIMATIONS AU SCROLL
     // ============================================
     function initScrollAnimations() {
-        const animatedElements = document.querySelectorAll('.service-card, .stat-card, .why-feature');
+        const animatedElements = document.querySelectorAll('.service-card, .stat-card, .why-feature, .review-card, .partner-techtrust-inner');
         if (!animatedElements.length) return;
 
         const observer = new IntersectionObserver(function(entries) {
@@ -209,6 +328,7 @@
     // INITIALISATION
     // ============================================
     document.addEventListener('DOMContentLoaded', function() {
+        initActiveNav();
         initMobileMenu();
         initHeaderScroll();
         initScrollProgress();
@@ -216,6 +336,7 @@
         initFAQ();
         initScrollAnimations();
         initCounters();
+        initGoogleReviews();
     });
 
 })();
