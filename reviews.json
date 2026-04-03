@@ -1,0 +1,54 @@
+{
+  "rating": 5.0,
+  "userRatingCount": 78,
+  "reviews": [
+    {
+      "author": "Lucio",
+      "rating": 5,
+      "text": "Trop bien ! Super accueil.",
+      "relativeTime": "Avril 2023"
+    },
+    {
+      "author": "Client vérifié",
+      "rating": 5,
+      "text": "Entreprise sérieuse et performante. La mission confiée a parfaitement été réalisée et je note que les collaborateurs sur site ont eu le sens du détail. Je recommande sans hésitation.",
+      "relativeTime": "Mars 2023"
+    },
+    {
+      "author": "Angie",
+      "rating": 5,
+      "text": "Je suis la cliente la plus fidèle de cette entreprise et vous pouvez lui faire confiance les yeux fermés, ils répondent parfaitement à mes attentes. Foncez !",
+      "relativeTime": "Mars 2023"
+    },
+    {
+      "author": "Client vérifié",
+      "rating": 5,
+      "text": "Rien à dire, très efficace, à l'écoute du client afin de pouvoir bien gérer le problème dans les plus brefs délais.",
+      "relativeTime": "Mars 2023"
+    },
+    {
+      "author": "Client vérifié",
+      "rating": 5,
+      "text": "Entreprise très professionnelle et efficace, les techniciens ont su arriver à bout de mes soucis informatiques. Pour la conception de mon site Internet je les ai également sollicités. Le travail est remarquable.",
+      "relativeTime": "Mars 2023"
+    },
+    {
+      "author": "Client vérifié",
+      "rating": 5,
+      "text": "Excellent intervention de Oussama ce jour. Disponible, patient, et très efficace !",
+      "relativeTime": "Mars 2023"
+    },
+    {
+      "author": "Client vérifié",
+      "rating": 5,
+      "text": "AroData m'a donné entière satisfaction, l'informaticien a été patient, clair dans ses explications, a respecté les rendez-vous et essaye de faciliter la disponibilité de l'intervention. Je recommande vivement !",
+      "relativeTime": "Février 2023"
+    },
+    {
+      "author": "Client vérifié",
+      "rating": 5,
+      "text": "Un grand merci à la société AroData pour le professionnalisme et l'efficacité ! Merci plus particulièrement aux techniciens qui sont très compétents. Je recommande fortement.",
+      "relativeTime": "Février 2023"
+    }
+  ]
+}
