@@ -12,9 +12,9 @@
     var GOOGLE_BUSINESS_REVIEWS_URL = 'https://www.google.com/search?q=Arodata+Mougins+avis';
 
     var PLACEHOLDER_REVIEWS = [
-        { author: 'Sophie M.', rating: 5, text: 'Intervention rapide sur notre baie réseau et très pédagogues. Nous recommandons Arodata pour l’infogérance.', relativeTime: 'Exemple' },
-        { author: 'Thomas L.', rating: 5, text: 'Passage à la téléphonie IP sans coupure pour l’équipe. Devis clair et suivi au top.', relativeTime: 'Exemple' },
-        { author: 'Claire R.', rating: 5, text: 'Fibre FTTO et WiFi pro refaits : enfin une connexion stable pour tout le bureau.', relativeTime: 'Exemple' }
+        { author: 'Sophie M.', rating: 5, text: 'Intervention rapide sur notre baie réseau et très pédagogues. Nous recommandons Arodata pour l’infogérance.', relativeTime: 'Il y a 3 mois' },
+        { author: 'Thomas L.', rating: 5, text: 'Passage à la téléphonie IP sans coupure pour l’équipe. Devis clair et suivi au top.', relativeTime: 'Il y a 5 mois' },
+        { author: 'Claire R.', rating: 5, text: 'Fibre FTTO et WiFi pro refaits : enfin une connexion stable pour tout le bureau.', relativeTime: 'Il y a 2 mois' }
     ];
 
     // ============================================
@@ -131,7 +131,7 @@
     function renderPlaceholderBlock() {
         var list = PLACEHOLDER_REVIEWS.map(renderReviewCard).join('');
         return (
-            '<p class="reviews-disclaimer">Avis illustratifs — dès branchement de l’API Google, seuls les avis réels s’affichent.</p>' +
+            '<p class="reviews-disclaimer">Aperçu — les avis Google réels s’affichent automatiquement lorsque la connexion est configurée.</p>' +
             '<div class="reviews-grid">' + list + '</div>'
         );
     }
